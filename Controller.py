@@ -33,11 +33,11 @@ def final_page():
 
 @app.route('/process')
 def script_call():
-	return redirect(service.main("D:/Degree/7thSem/Minorproject/VideoCategorisation/videos/",app.config['SRC']))
+	return redirect(service.main("D:/",app.config['SRC']))
 
 @app.route('/download')
 def file_download():
-	path="D:/Degree/7thSem/Minorproject/VideoCategorisation/"+app.config['SRC']
+	path="D:/"+app.config['SRC']
 	return send_file(path, as_attachment=True)
 
 @app.route('/success', methods=['POST'])
@@ -54,7 +54,7 @@ def upload_file():
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			file.save(filename)
-			shutil.copy(filename, 'D:/Degree/7thSem/Minorproject/VideoCategorisation/videos')
+			shutil.copy(filename, 'D:/')
 			app.config['SRC']=filename
 			os.remove(filename)
 			flash('File successfully uploaded')
